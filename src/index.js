@@ -1,4 +1,3 @@
-
 "use strict";
 
 let currentTemp = 65;
