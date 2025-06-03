@@ -3,15 +3,21 @@ h2 {
 }
 
 body {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: auto auto auto auto;
-  grid-gap: 1rem;
-
   font-family: "Rubik", sans-serif;
   font-size: 18px;
   background-color: #1b69f9;
   margin: 2rem;
+}
+
+.main-grid {
+  display: grid;
+  grid-template-areas:
+    "temp city sky"
+    "landscape landscape landscape"
+    "skyDisplay skyDisplay skyDisplay";
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 1rem;
 }
 
 .header__header {
@@ -19,7 +25,9 @@ body {
   grid-column: span 3;
   display: flex;
   align-items: center;
-  margin: 2rem auto 3rem 0;
+  margin: 2rem auto 3rem auto;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .header__header > h1 {
@@ -37,16 +45,48 @@ body {
   content: "✨";
 }
 
-.temperature__section,
-.sky__section,
-.city-name__section {
+.temperature__section {
+  grid-area: temp; /* NEW */
   border-radius: 8px;
   padding: 2rem;
   background-color: white;
 }
 
-.temperature__section {
-  grid-row: 2;
+.sky__section {
+  grid-area: sky;
+  border-radius: 8px;
+  padding: 2rem;
+  background-color: white;
+}
+
+.city-name__section {
+  grid-area: city;
+  border-radius: 8px;
+  padding: 2rem;
+  background-color: white;
+}
+
+.garden__section {
+  grid-area: landscape;
+  text-align: center;
+  align-self: center;
+  border-radius: 8px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  transition: background-color 0.5s ease;
+}
+
+.sky-display__section {
+  grid-area: skyDisplay; /* NEW */
+  text-align: center;
+  align-self: center;
+  border-radius: 8px;
+  padding: 2rem;
+  background-color: white;
 }
 
 .temperature__section button {
@@ -61,33 +101,15 @@ body {
   border-radius: 10px;
 }
 
-.sky__section {
-  grid-row: 3;
-}
-
-.city-name__section {
-  grid-row: 4;
-}
-
-.garden__section {
-  grid-row: 2 / span 3;
-  grid-column: 2;
-  text-align: center;
-  align-self: center;
-}
-
 .temperature__content {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  /* justify-content: center; */
 }
 
 #tempValue {
   font-size: 3rem;
   margin-left: 1.5rem;
-  /* padding-right: 1rem; */
-  /* margin-right: 1.5rem; */
 }
 
 .temperature__controls {
@@ -97,54 +119,30 @@ body {
 }
 
 .garden__section > h2 {
-  color: white;
+  color: black;
 }
 
 .garden__content {
   min-height: 200px;
-  max-width: fit-content;
+  max-width: max-content;
   margin: auto;
   padding: 2rem;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   border-radius: 8px;
   font-size: 2em;
 }
 
 .city-name__reset-btn {
   border: 0;
-  background-color: #1655cc;
+  background-color: #1b69f9;
   color: white;
   border-radius: 8px;
   padding: 1rem;
   font-family: "Rubik", sans-serif;
-}
-
-.red {
-  color: red;
-}
-
-.orange {
-  color: orange;
-}
-
-.yellow {
-  color: gold;
-}
-
-.yellow-green {
-  color: yellowgreen;
-}
-
-.green {
-  color: green;
-}
-
-.teal {
-  color: teal;
+  margin-left: 0.5rem;
+  vertical-align: middle;
 }
 
 .cloudy {
@@ -161,4 +159,36 @@ body {
 
 .snowy {
   background-color: lightsteelblue;
+}
+
+@media (max-width: 768px) {
+  .main-grid {
+    grid-template-areas:
+      "temp"
+      "city"
+      "sky"
+      "landscape"
+      "skyDisplay";
+    grid-template-columns: 1fr;
+  }
+}
+
+#skySelect {
+  width: 100%;
+  font-size: 1.25rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#cityNameInput {
+  width: 100%;
+  font-size: 1.25rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }

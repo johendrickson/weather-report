@@ -14,6 +14,7 @@ const cityNameReset = document.getElementById("cityNameReset");
 const currentTempButton = document.getElementById("currentTempButton");
 const skySelect = document.getElementById("skySelect");
 const skyElement = document.getElementById("sky");
+const gardenSection = document.querySelector('.garden__section');
 
 const getTemperatureColor = (temp) => {
     if (temp >= 80) return "red";
@@ -51,9 +52,15 @@ const updateTemperatureDisplay = () => {
     landscapeElement.textContent = getLandscape(currentTemp);
 };
 
+const updateGardenBackgroundColor = (sky) => {
+    gardenSection.classList.remove('sunny', 'cloudy', 'rainy', 'snowy');
+    gardenSection.classList.add(sky);
+};
+
 const updateSkyDisplay = () => {
     skySelect.value = currentSky;
     skyElement.textContent = getSkyDisplay(currentSky);
+    updateGardenBackgroundColor(currentSky);
 };
 
 const updateCityDisplay = () => {
@@ -85,6 +92,7 @@ skySelect.addEventListener("change", (event) => {
     currentSky = event.target.value;
     updateSkyDisplay();
 });
+
 
 updateCityDisplay();
 updateTemperatureDisplay();
