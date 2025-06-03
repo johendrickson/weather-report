@@ -61,3 +61,4 @@ cityNameReset.addEventListener("click", () => {
 
 updateTemperatureDisplay();
 updateCityDisplay();
+
