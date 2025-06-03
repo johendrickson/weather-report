@@ -1,11 +1,15 @@
 "use strict";
 
 let currentTemp = 65;
+let currentCity = "Seattle";
 
 const tempValueElement = document.getElementById("tempValue");
 const increaseTempButton = document.getElementById("increaseTempControl");
 const decreaseTempButton = document.getElementById("decreaseTempControl");
 const landscapeElement = document.getElementById("landscape");
+const cityNameInput = document.getElementById("cityNameInput");
+const headerCityName = document.getElementById("headerCityName");
+const cityNameReset = document.getElementById("cityNameReset");
 
 const getTemperatureColor = (temp) => {
     if (temp >= 80) return "red";
@@ -24,13 +28,15 @@ const getLandscape = (temp) => {
 
 const updateTemperatureDisplay = () => {
     tempValueElement.textContent = currentTemp;
-
     tempValueElement.classList.remove("red", "orange", "yellow", "green", "teal");
-
     const colorClass = getTemperatureColor(currentTemp);
     tempValueElement.classList.add(colorClass);
-
     landscapeElement.textContent = getLandscape(currentTemp);
+};
+
+const updateCityDisplay = () => {
+    headerCityName.textContent = currentCity;
+    cityNameInput.value = currentCity;
 };
 
 increaseTempButton.addEventListener("click", () => {
@@ -43,12 +49,15 @@ decreaseTempButton.addEventListener("click", () => {
     updateTemperatureDisplay();
 });
 
-updateTemperatureDisplay();"use strict";
-
-const cityNameInput = document.getElementById("cityNameInput");
-const headerCityName = document.getElementById("headerCityName");
-
-cityNameInput.addEventListener("input", function(){
-    const newCityName = cityNameInput.value;
-    headerCityName.textContent = newCityName;
+cityNameInput.addEventListener("input", (event) => {
+    currentCity = event.target.value;
+    headerCityName.textContent = currentCity;
 });
+
+cityNameReset.addEventListener("click", () => {
+    currentCity = "Seattle";
+    updateCityDisplay();
+});
+
+updateTemperatureDisplay();
+updateCityDisplay();
