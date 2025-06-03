@@ -1,5 +1,8 @@
 "use strict";
 
+const openWeatherApiKey = process.env.OPENWEATHER_API_KEY;
+const locationIqApiKey = process.env.LOCATIONIQ_API_KEY;
+
 let currentTemp = 65;
 let currentCity = "Seattle";
 
