@@ -63,6 +63,8 @@ cityNameReset.addEventListener("click", () => {
 updateTemperatureDisplay();
 updateCityDisplay();
 
+
+
 currentTempButton.addEventListener("click", () => {
     const cityName = headerCityName.textContent;
 
