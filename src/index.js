@@ -1,8 +1,5 @@
 "use strict";
 
-const weatherKey = process.env.WEATHER_KEY;
-const locationKey = process.env.LOCATION_KEY;
-
 let currentTemp = 65;
 let currentCity = "Seattle";
 
