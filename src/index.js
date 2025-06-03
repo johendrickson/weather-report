@@ -66,12 +66,12 @@ updateCityDisplay();
 currentTempButton.addEventListener("click", async () => {
     try {
         // Get coordinates from LocationIQ
-        const locationResponse = await axios.get(`http://127.0.0.1:5001/location?q=${currentCity}`);
+        const locationResponse = await axios.get(`http://127.0.0.1:5000/location?q=${currentCity}`);
         if (locationResponse.data && locationResponse.data.length > 0) {
             const lat = locationResponse.data[0].lat;
             const lon = locationResponse.data[0].lon;
             // Get weather from OpenWeather
-            const weatherResponse = await axios.get(`http://127.0.0.1:5001/weather?lat=${lat}&lon=${lon}`);
+            const weatherResponse = await axios.get(`http://127.0.0.1:5000/weather?lat=${lat}&lon=${lon}`);
             if (weatherResponse.data && weatherResponse.data.main) {
                 // Convert from Kelvin to Fahrenheit
                 const tempInFahrenheit = Math.round((weatherResponse.data.main.temp - 273.15) * 9/5 + 32);
