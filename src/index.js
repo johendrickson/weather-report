@@ -63,17 +63,25 @@ cityNameReset.addEventListener("click", () => {
 updateTemperatureDisplay();
 updateCityDisplay();
 
-
-
-currentTempButton.addEventListener("click", () => {
-    const cityName = headerCityName.textContent;
-
-axios
-    .get('some URL')
-    .then((response) => {
-    // Code that executes with a successful response goes here
-        updateTemperatureDisplay();
-    })
-    .catch((error) => {
-        console.error("Error fetching temperature:", error);
-    });
+currentTempButton.addEventListener("click", async () => {
+    try {
+        // Get coordinates from LocationIQ
+        const locationResponse = await axios.get(`http://127.0.0.1:5001/location?q=${currentCity}`);
+        if (locationResponse.data && locationResponse.data.length > 0) {
+            const lat = locationResponse.data[0].lat;
+            const lon = locationResponse.data[0].lon;
+            // Get weather from OpenWeather
+            const weatherResponse = await axios.get(`http://127.0.0.1:5001/weather?lat=${lat}&lon=${lon}`);
+            if (weatherResponse.data && weatherResponse.data.main) {
+                // Convert from Kelvin to Fahrenheit
+                const tempInFahrenheit = Math.round((weatherResponse.data.main.temp - 273.15) * 9/5 + 32);
+                // Update the displayed temperature
+                currentTemp = tempInFahrenheit;
+                updateTemperatureDisplay();
+            }
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Could not get weather data. Make sure proxy server is running.");
+    }
+});
