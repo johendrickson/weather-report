@@ -2,6 +2,7 @@
 
 let currentTemp = 65;
 let currentCity = "Seattle";
+let currentSky = "sunny";
 
 const tempValueElement = document.getElementById("tempValue");
 const increaseTempButton = document.getElementById("increaseTempControl");
@@ -11,6 +12,8 @@ const cityNameInput = document.getElementById("cityNameInput");
 const headerCityName = document.getElementById("headerCityName");
 const cityNameReset = document.getElementById("cityNameReset");
 const currentTempButton = document.getElementById("currentTempButton");
+const skySelect = document.getElementById("skySelect");
+const skyElement = document.getElementById("sky");
 
 const getTemperatureColor = (temp) => {
     if (temp >= 80) return "red";
@@ -27,12 +30,30 @@ const getLandscape = (temp) => {
     return "🌲🌲⛄️🌲⛄️🍂🌲🍁🌲🌲⛄️🍂🌲";
 };
 
+const getSkyDisplay = (sky) => {
+    if (sky === "sunny") {
+        return "☁️ ☁️ ☁️ ☀️ ☁️ ☁️";
+    } else if (sky === "cloudy") {
+        return "☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️";
+    } else if (sky === "rainy") {
+        return "🌧🌈⛈🌧🌧💧⛈🌧🌦🌧💧🌧🌧";
+    } else if (sky === "snowy") {
+        return "🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨";
+    }
+    return "";
+};
+
 const updateTemperatureDisplay = () => {
     tempValueElement.textContent = currentTemp;
     tempValueElement.classList.remove("red", "orange", "yellow", "green", "teal");
     const colorClass = getTemperatureColor(currentTemp);
     tempValueElement.classList.add(colorClass);
     landscapeElement.textContent = getLandscape(currentTemp);
+};
+
+const updateSkyDisplay = () => {
+    skySelect.value = currentSky;
+    skyElement.textContent = getSkyDisplay(currentSky);
 };
 
 const updateCityDisplay = () => {
@@ -60,8 +81,14 @@ cityNameReset.addEventListener("click", () => {
     updateCityDisplay();
 });
 
-updateTemperatureDisplay();
+skySelect.addEventListener("change", (event) => {
+    currentSky = event.target.value;
+    updateSkyDisplay();
+});
+
 updateCityDisplay();
+updateTemperatureDisplay();
+updateSkyDisplay();
 
 currentTempButton.addEventListener("click", async () => {
     try {
