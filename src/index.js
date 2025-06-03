@@ -10,6 +10,7 @@ const landscapeElement = document.getElementById("landscape");
 const cityNameInput = document.getElementById("cityNameInput");
 const headerCityName = document.getElementById("headerCityName");
 const cityNameReset = document.getElementById("cityNameReset");
+const currentTempButton = document.getElementById("currentTempButton");
 
 const getTemperatureColor = (temp) => {
     if (temp >= 80) return "red";
@@ -61,3 +62,16 @@ cityNameReset.addEventListener("click", () => {
 
 updateTemperatureDisplay();
 updateCityDisplay();
+
+currentTempButton.addEventListener("click", () => {
+    const cityName = headerCityName.textContent;
+
+axios
+    .get('some URL')
+    .then((response) => {
+    // Code that executes with a successful response goes here
+        updateTemperatureDisplay();
+    })
+    .catch((error) => {
+        console.error("Error fetching temperature:", error);
+    });
