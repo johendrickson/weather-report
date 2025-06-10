@@ -112,6 +112,27 @@ body {
   margin-left: 1.5rem;
 }
 
+/* Temperature color classes */
+.red {
+  color: red;
+}
+
+.orange {
+  color: orange;
+}
+
+.yellow {
+  color: yellow;
+}
+
+.green {
+  color: green;
+}
+
+.teal {
+  color: teal;
+}
+
 .temperature__controls {
   display: flex;
   flex-direction: column;
